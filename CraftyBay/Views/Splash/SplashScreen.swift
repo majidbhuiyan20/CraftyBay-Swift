@@ -8,16 +8,34 @@
 import SwiftUI
 
 struct SplashView: View {
+    @State private var isActive = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if isActive {
+            HomeView()
+        } else {
+            VStack {
+                Spacer()
+                
+                Image("logo")
+                    .resizable()
+                    .frame(width: 150, height: 150)
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                        isActive = true
+                    }
+                }
+            }
         }
-        .padding()
     }
 }
+
 
 #Preview {
     SplashView()
