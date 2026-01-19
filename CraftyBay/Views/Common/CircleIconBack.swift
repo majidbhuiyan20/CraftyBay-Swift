@@ -14,7 +14,8 @@ struct CircleIconBack: View {
         Image(systemName: systemName)
             .font(.system(size: 22))
             .padding(10)
-            .background(Color.gray.opacity(0.2))
+            .background(AppColor.primaryBackground)
+            .foregroundColor(AppColor.iconColor)
             .clipShape(Circle())
     }
 }
