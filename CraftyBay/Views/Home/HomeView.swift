@@ -52,9 +52,43 @@ struct HomeView: View {
                       
                     
                     // Search Bar Ends Here
-                    // Content Scroll
+                    
+                //===================================
+                    
+                    // Slider bellow
                 
-                                  CarouselSliderView(items: ["Happy New Year Special Deal Save 30%", "Eid-Ul-Fitr Special Deal 35%", "Happy New Year Special Deal Save 30%", "Happy New Year Special Deal Save 30%"])
+                        CarouselSliderView(items: ["Happy New Year Special Deal Save 30%", "Eid-Ul-Fitr Special Deal 35%", "Happy New Year Special Deal Save 30%", "Happy New Year Special Deal Save 30%"])
+                    //Slider End
+                    
+                //====================================
+                    
+                    SectionHeaderView(
+                        title: "All Categories",
+                        buttonTitle: "See All"
+                    ) {
+                        print("See All tapped")
+                    }.padding(.bottom, 12)
+                    
+                    
+                    HStack(spacing: 16){
+                        CategoryItemView(iconName: "heart.fill", title: "Beauty") {
+                            //Iteam On tap Code
+                        }
+                        CategoryItemView(iconName: "shoeprints.fill", title: "shoes") {
+                            //Iteam On tap Code
+                        }
+                        CategoryItemView(iconName: "tshirt.fill", title: "Shirts") {
+                            //Iteam On tap Code
+                        }
+                        CategoryItemView(iconName: "iphone", title: "Electronics") {
+                            //Iteam On tap Code
+                        }
+
+                    }.padding(.horizontal, 16)
+
+
+                    
+                    
                         
                        
  }

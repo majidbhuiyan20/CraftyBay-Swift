@@ -10,4 +10,5 @@ struct AppColor {
     static let secondary = Color(hex: "#FF6B6B")
     static let primaryBackground = Color(hex: "#F3F2F3")
     static let iconColor = Color(hex: "#707171")
+    static let itemBackground = Color(hex: "#E7F7F6")
 }
