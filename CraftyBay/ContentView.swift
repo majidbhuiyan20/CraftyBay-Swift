@@ -1,9 +1,9 @@
-//
+
 //  ContentView.swift
 //  CraftyBay
 //
-//  Created by Betopia on 19/1/26.
-//
+//  Created by Majid Bhuiyan on 19/1/26.
+
 
 import SwiftUI
 
@@ -22,3 +22,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+//
