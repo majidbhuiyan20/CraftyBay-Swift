@@ -1,8 +1,8 @@
 //
-//  CraftyBayApp.swift
+//  CraftyBay.swift
 //  CraftyBay
 //
-//  Created by Betopia on 19/1/26.
+//  Created by Majid Bhuiyan on 19/1/26.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct CraftyBayApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }
