@@ -48,10 +48,16 @@ struct HomeView: View {
                         .background(AppColor.primaryBackground)
                         .cornerRadius(12)
                         .padding(.horizontal, 16)
+                        .padding(.bottom)
+                      
                     
                     // Search Bar Ends Here
+                    // Content Scroll
+                
+                                  CarouselSliderView(items: ["Happy New Year Special Deal Save 30%", "Eid-Ul-Fitr Special Deal 35%", "Happy New Year Special Deal Save 30%", "Happy New Year Special Deal Save 30%"])
                         
-                }
+                       
+ }
                 Spacer()
             }
         }
