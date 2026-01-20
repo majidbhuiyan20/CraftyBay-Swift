@@ -148,7 +148,7 @@ struct HomeView: View {
 
 
                         SectionHeaderView(
-                            title: "Popular",
+                            title: "Special",
                             buttonTitle: "See All"
                         ) {
                             print("See All tapped")
