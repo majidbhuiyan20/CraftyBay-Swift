@@ -144,6 +144,7 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.horizontal, 16)
+                            .padding(.bottom, 8)
                         }
 
 
@@ -199,7 +200,9 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.horizontal, 16)
+                            .padding(.bottom, 8)
                         }
+                        
 
 
                         
@@ -207,7 +210,7 @@ struct HomeView: View {
                            
      }
                     Spacer()
-                    }
+                }.padding(.bottom)
                    
             }
         }
