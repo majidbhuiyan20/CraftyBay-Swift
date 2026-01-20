@@ -19,26 +19,27 @@ struct CustomTabView: View {
                     Text("Home")
                 }
 
-            // Profile Tab
-            HomeView()
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }
+            // Categories Tab
+            CategoriesView()
+                    .tabItem {
+                        Image(systemName: "square.grid.2x2.fill")
+                        Text("Categories")
+                    }
+            
 
-            // Statistics Tab
-            HomeView()
-                .tabItem {
-                    Image(systemName: "chart.bar.fill")
-                    Text("Statistics")
-                }
+                
 
-            // Settings Tab
-            HomeView()
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                    Text("Settings")
-                }
+            CategoriesView()
+                  .tabItem {
+                      Image(systemName: "cart.fill")
+                      Text("Cart")
+                  }
+
+            CategoriesView()
+                   .tabItem {
+                       Image(systemName: "gift.fill")   // 🎁 Gift icon
+                       Text("Wishlist")
+                   }
         }
         .navigationBarBackButtonHidden(true)
     }
