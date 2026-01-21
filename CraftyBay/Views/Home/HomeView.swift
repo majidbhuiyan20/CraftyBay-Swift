@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var searchText: String = ""
-    
+    @Binding var selectedTab: AppTab
     var body: some View {
         
         
@@ -69,6 +69,7 @@ struct HomeView: View {
                             title: "All Categories",
                             buttonTitle: "See All"
                         ) {
+                            selectedTab = .categories
                             print("See All tapped")
                         }.padding(.bottom, 12)
                         
@@ -218,5 +219,6 @@ struct HomeView: View {
     }
 }
 #Preview {
-    HomeView()
+    HomeView(selectedTab: .constant(.home))
 }
+
