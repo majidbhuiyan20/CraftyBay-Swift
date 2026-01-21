@@ -32,6 +32,9 @@ struct CategoryItemView: View {
                 .font(.title3)
                 .bold()
                 .foregroundColor(AppColor.primaryColor)
+                .lineLimit(1)
+                .multilineTextAlignment(.leading)
+
         }
         .onTapGesture {
             onTap()
