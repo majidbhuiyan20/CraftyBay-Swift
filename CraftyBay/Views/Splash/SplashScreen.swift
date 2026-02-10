@@ -12,7 +12,7 @@ struct SplashView: View {
 
     var body: some View {
         if isActive {
-            CustomTabView()
+            LoginView()
         } else {
             VStack {
                 Spacer()
