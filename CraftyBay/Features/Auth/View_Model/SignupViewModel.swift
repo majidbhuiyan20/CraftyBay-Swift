@@ -5,60 +5,103 @@
 //  Created by Majid Bhuiyan on 11/2/26.
 //
 
+
 import Foundation
 import Combine
 
-final class SignupViewModel: ObservableObject{
+struct SignupResponseData: Codable {
+    let userId: String
+    let email: String
+}
+
+@MainActor
+final class SignupViewModel: ObservableObject {
+
+
+    @Published var firstName = ""
+    @Published var lastName = ""
+    @Published var email = ""
+    @Published var password = ""
+    @Published var phone = ""
+    @Published var city = ""
     
-    @Published var firstName: String = ""
-    @Published var lastName: String = ""
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var phone: String = ""
-    @Published var city: String = ""
-    @Published var isLoading: Bool = false
+    @Published var isLoading = false
     @Published var errorMessage: String?
-    
-    func signUp(){
-        guard validate()
-        else{
-            return
-        }
+
+
+    func signUp() async -> Bool {
+        
+
+        guard validate() else { return false }
+        
         isLoading = true
         errorMessage = nil
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.5){
-            self.isLoading = false
-            print("Signup success for\(self.email)")
-        }
+
+        let requestModel = SignupRequest(
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            password: password,
+            phone: phone,
+            city: city
+        )
         
+
+        let endpoint = APIEndpoint(
+            path: "/signup",
+            method: .POST,
+            body: requestModel
+        )
+        
+        do {
+        
+            let response: APIResponse<SignupResponseData> = try await NetworkManager.shared.request(
+                endpoint,
+                responseType: APIResponse<SignupResponseData>.self
+            )
+            
+        
+            isLoading = false
+            if response.success {
+                print("Signup success! User ID:", response.data?.userId ?? "N/A")
+                return true
+            } else {
+                errorMessage = response.message ?? "Signup failed"
+                return false
+            }
+            
+        } catch {
+            isLoading = false
+            errorMessage = error.localizedDescription
+            return false
+        }
     }
     
-    private func validate()->Bool{
-        
-        guard !firstName.isEmpty else{
+
+    private func validate() -> Bool {
+        if firstName.isEmpty {
             errorMessage = "First Name is required"
             return false
         }
-        guard !lastName.isEmpty else{
+        if lastName.isEmpty {
             errorMessage = "Last Name is required"
             return false
         }
-        guard !phone.isEmpty else{
+        if phone.isEmpty {
             errorMessage = "Phone Number is required"
             return false
         }
-        guard email.contains("@") else{
+        if !email.contains("@") {
             errorMessage = "Enter a valid email"
             return false
         }
-        
-        guard password.count >= 6 else{
-            errorMessage = "Password must be a least 6 character"
+        if password.count < 6 {
+            errorMessage = "Password must be at least 6 characters"
             return false
         }
-        guard !city.isEmpty else{
-            errorMessage = "Address is required"
+        if city.isEmpty {
+            errorMessage = "City is required"
             return false
         }
         return true
