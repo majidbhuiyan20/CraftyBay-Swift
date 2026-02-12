@@ -46,11 +46,19 @@ struct SignupView: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
                 
+                
+                TextField("Phone", text:$viewModel.phone)
+                    .textInputAutocapitalization(.words)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                
                 TextField("City", text:$viewModel.city)
                     .textInputAutocapitalization(.words)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
+                
                 
                 
                 Button{
@@ -75,7 +83,7 @@ struct SignupView: View {
             }.padding()
             
             Button("Already have an account? Login"){
-                
+                goLogin = true
             }
             .font(.footnote)
             .padding(.top, 8)

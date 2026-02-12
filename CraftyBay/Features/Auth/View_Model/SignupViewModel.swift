@@ -14,6 +14,7 @@ final class SignupViewModel: ObservableObject{
     @Published var lastName: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var phone: String = ""
     @Published var city: String = ""
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -41,6 +42,10 @@ final class SignupViewModel: ObservableObject{
         }
         guard !lastName.isEmpty else{
             errorMessage = "Last Name is required"
+            return false
+        }
+        guard !phone.isEmpty else{
+            errorMessage = "Phone Number is required"
             return false
         }
         guard email.contains("@") else{
