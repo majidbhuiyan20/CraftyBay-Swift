@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Foundation
 
 final class NetworkManager {
     
@@ -29,6 +30,15 @@ final class NetworkManager {
         request.httpBody = endpoint.body
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+      
+        if let body = endpoint.body,
+           let bodyString = String(data: body, encoding: .utf8) {
+            print("➡️ [REQUEST] \(endpoint.method.rawValue) \(url.absoluteString)")
+            print("Body: \(bodyString)")
+        } else {
+            print("➡️ [REQUEST] \(endpoint.method.rawValue) \(url.absoluteString) (No body)")
+        }
+        
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -40,8 +50,21 @@ final class NetworkManager {
         }
         
         do {
-            return try JSONDecoder().decode(T.self, from: data)
+            let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+            
+           
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("✅ [RESPONSE] \(endpoint.method.rawValue) \(url.absoluteString)")
+                print("Response Data: \(jsonString)")
+            }
+            
+            return decodedResponse
+            
         } catch {
+           
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("[DECODING ERROR] Response: \(responseString)")
+            }
             throw APIError.decodingError
         }
     }

@@ -11,6 +11,8 @@ struct SignupView: View {
     
     @State private var goLogin = false
     @State private var goMainNav = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     @StateObject private var viewModel = SignupViewModel()
     var body: some View {
         NavigationStack{
@@ -61,15 +63,26 @@ struct SignupView: View {
                 
                 
                 
-                Button{
-                    viewModel.signUp()
-                    goMainNav = true
+                
+
+                Button {
+                    Task {
+                        let success = await viewModel.signUp()
+                        
+                        if success {
+                            alertMessage = "Signup successful!"
+                            showAlert = true
+                            goMainNav = true
+                        } else {
+                            alertMessage = viewModel.errorMessage ?? "Signup failed!"
+                            showAlert = true
+                        }
+                    }
                 } label: {
-                    if viewModel.isLoading{
+                    if viewModel.isLoading {
                         ProgressView()
                             .frame(maxWidth: .infinity)
-                    }
-                    else{
+                    } else {
                         Text("Sign Up")
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
@@ -80,26 +93,32 @@ struct SignupView: View {
                 .foregroundColor(.white)
                 .cornerRadius(12)
                 .disabled(viewModel.isLoading)
-            }.padding()
-            
-            Button("Already have an account? Login"){
-                goLogin = true
-            }
-            .font(.footnote)
-            .padding(.top, 8)
-            
-            
-            
-            
-            
+                .alert(alertMessage, isPresented: $showAlert) {
+                    Button("OK", role: .cancel) {}
+                }
+
+                
+                
+                Button("Already have an account? Login"){
+                    goLogin = true
+                }
+                .font(.footnote)
+                .padding(.top, 8)
+                
+                
+                
+                
+                
                 .navigationDestination(isPresented: $goLogin){
                     LoginView()
                 }
                 .navigationDestination(isPresented: $goMainNav){
                     CustomTabView()
                 }
+            }.padding()
         }
     }
+    
 }
 
 #Preview {

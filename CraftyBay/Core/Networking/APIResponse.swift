@@ -7,8 +7,8 @@
 
 
 struct APIResponse<T: Codable>: Codable {
-    let success: Bool
-    let message: String?
+    let code: Int
+    let status: String
+    let msg: String
     let data: T?
 }
-
